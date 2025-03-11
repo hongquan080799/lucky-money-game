@@ -2,18 +2,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const landingPage = document.getElementById("landingPage");
     const gameContainer = document.getElementById("gameContainer");
     const startGameButton = document.getElementById("startGameButton");
+    const resultElement = document.getElementById("result");
 
-    // Hardcoded messages
+    // Define messages with probabilities
     const messages = [
-        "Giảm 20% toàn bộ sản phẩm",
-        "Giảm 10% toàn bộ sản phẩm",
-        "Tặng hộp đựng trang sức cho đơn > 350k",
-        "Tặng khuyên tai ngọc trai trị giá 150k cho đơn > 350k",
-        "Tặng khăn lau bạc cho hóa đơn bất kì"
+        { text: "Giảm 20% toàn bộ sản phẩm", probability: 35 },
+        { text: "Giảm 10% toàn bộ sản phẩm", probability: 20 },
+        { text: "Tặng hộp đựng trang sức cho đơn > 350k", probability: 20 },
+        { text: "Tặng khuyên tai ngọc trai trị giá 150k cho đơn > 350k", probability: 20 },
+        { text: "Tặng khăn lau bạc cho hóa đơn bất kì", probability: 5 }
     ];
 
-    // Shuffle messages
-    const shuffledMessages = messages.sort(() => Math.random() - 0.5);
+    // Function to get a message based on probability
+    function getRandomMessage() {
+        const random = Math.random() * 100; // Random number between 0-100
+        let cumulativeProbability = 0;
+
+        for (const message of messages) {
+            cumulativeProbability += message.probability;
+            if (random < cumulativeProbability) {
+                return message.text;
+            }
+        }
+    }
 
     // Navigate from landing page to game
     startGameButton.addEventListener("click", () => {
@@ -23,43 +34,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Add click event to each envelope
     const envelopes = document.querySelectorAll(".envelope");
-    envelopes.forEach((envelope, index) => {
-        envelope.addEventListener("click", () => {
-            // Reveal the message
-            const resultElement = document.getElementById("result");
-            resultElement.textContent = shuffledMessages[index];
-
-            // Disable further clicks
-            envelopes.forEach(env => env.style.pointerEvents = "none");
-            envelope.classList.add("selected");
-        });
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const envelopes = document.querySelectorAll('.envelope');
-    const envelopesContainer = document.querySelector('.envelopes-container');
-
-    // Click event for each envelope
     envelopes.forEach((envelope) => {
-        envelope.addEventListener('click', function() {
+        envelope.addEventListener("click", function () {
             // Hide all envelopes except the clicked one
             envelopes.forEach((el) => {
                 if (el !== envelope) {
-                    el.classList.add('hidden');
+                    el.classList.add("hidden");
                 }
             });
 
-            // Show content inside the selected envelope
-            const content = envelope.querySelector('.envelope-content');
-            content.style.display = 'block'; // Reveal the content
-            envelope.classList.add('selected'); // Add a border around the envelope
+            // Reveal the message
+            resultElement.textContent = getRandomMessage();
 
-            // Optionally, you can add a delay before showing the content (animation effect)
+            // Show content inside the selected envelope
+            const content = envelope.querySelector(".envelope-content");
+            content.style.display = "block"; // Reveal content
+            envelope.classList.add("selected"); // Highlight selected envelope
+
+            // Apply animation
             setTimeout(() => {
-                content.style.opacity = 1; // Make the content fully visible
-                content.style.transform = 'scale(1)';
-            }, 500); // Delay to match animation timing
+                content.style.opacity = 1;
+                content.style.transform = "scale(1)";
+            }, 500);
+
+            // Disable further clicks
+            envelopes.forEach(env => env.style.pointerEvents = "none");
         });
     });
 });

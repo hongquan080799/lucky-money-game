@@ -7,7 +7,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(45deg, #1e484c, #2e6469);
+    background: linear-gradient(45deg, #9b458f, #ff8fd0);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -128,8 +128,7 @@ body {
 }
 
 .animated-envelope {
-    width: 120px; /* Increased size */
-    height: 160px; /* Increased size */
+    width: 160px; /* Increased size */
     animation: moveEnvelope 2s infinite alternate, envelopeSpin 4s infinite linear;
 }
 
@@ -242,8 +241,7 @@ h1 {
 }
 
 .envelope {
-    width: 120px; /* Increased size */
-    height: 160px; /* Increased size */
+    width: 160px; /* Increased size */
     cursor: pointer;
     position: relative;
     transition: transform 0.2s;
