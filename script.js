@@ -5,11 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Hardcoded messages
     const messages = [
-        "Giảm 30% toàn bộ sản phẩm",
         "Giảm 20% toàn bộ sản phẩm",
         "Giảm 10% toàn bộ sản phẩm",
-        "Tặng lắc đá phong thủy với đơn > 350K",
-        "Tặng Khuyên tai Kim cương Moissanite khi mua dây chuyền kim cương Moissanite"
+        "Tặng hộp đựng trang sức cho đơn > 350k",
+        "Tặng khuyên tai ngọc trai trị giá 150k cho đơn > 350k",
+        "Tặng khăn lau bạc cho hóa đơn bất kì"
     ];
 
     // Shuffle messages
