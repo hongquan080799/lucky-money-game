@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         landingPage.classList.add("hidden");
         gameContainer.classList.remove("hidden");
     });
+    startGameButton.click()
 
     // Add click event to each envelope
     const envelopes = document.querySelectorAll(".envelope");
